@@ -105,7 +105,10 @@ public class Hand {
 		return Ace;
 	}
 
-
+	public int getbNatural() {
+			
+			return this.bNatural;
+		}
 
 	private static ArrayList<Hand> ExplodeHands(Hand h) {
 		ArrayList<Hand> HandsToReturn = new ArrayList<Hand>();
@@ -550,5 +553,7 @@ public class Hand {
 			return 0;
 		}
 	};
+
+	
 	
 }

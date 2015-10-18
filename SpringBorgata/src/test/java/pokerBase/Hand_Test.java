@@ -33,7 +33,7 @@ public class Hand_Test {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+	/////////////////////THE REST OF THE NORMAL HAND EVALUATION/COMPARISONS ARE IN Wild_Test.java/////////
 	@Test
 	public void FiveOfAKind() {
 		Deck d = new Deck();
