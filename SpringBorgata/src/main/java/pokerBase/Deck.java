@@ -18,6 +18,9 @@ public class Deck {
 	@XmlElement (name="Remaining Card")
 	private ArrayList<Card> cards;
 
+	/**
+	 * No-Args constructor for Deck. Creates basic deck.
+	 */
 	public Deck() {
 
 		//	Create an ArrayList of Cards, add each card
@@ -36,6 +39,10 @@ public class Deck {
 
 	}
 	
+	/**
+	 * Creates deck with specified number of Jokers
+	 * @param NbrOfJokers
+	 */
 	public Deck(int NbrOfJokers)
 	{
 		this();
@@ -48,6 +55,11 @@ public class Deck {
 		ShuffleCards();
 	}
 	
+	/**
+	 * Creates deck with wilds and Jokers
+	 * @param NbrOfJokers
+	 * @param Wilds
+	 */
 	public Deck(int NbrOfJokers, ArrayList<Card> Wilds)
 	{
 		this(NbrOfJokers);
@@ -68,12 +80,19 @@ public class Deck {
 		
 	}
 	
+	/**
+	 * Shuffles cards
+	 */
 	private void ShuffleCards()
 	{
 		//	Shuffle the cards
 		Collections.shuffle(cards);
 	}
 
+	/**
+	 * Removes card from deck and returns the card
+	 * @return
+	 */
 	public Card drawFromDeck() {
 		// Removes the first card from the deck and return the card
 		Card FirstCard = cards.get(0);
@@ -81,11 +100,19 @@ public class Deck {
 		return FirstCard;
 	}
 
+	/**
+	 * Returns total number of cards still in the deck
+	 * @return
+	 */
 	public int getTotalCards() {
 		// Returns the total number of cards still in the deck
 		return cards.size();
 	}
 	
+	/**
+	 * Gets ArrayList of cards in the deck
+	 * @return
+	 */
 	public ArrayList<Card> getCards()
 	{
 		return this.cards;

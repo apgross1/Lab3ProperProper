@@ -38,6 +38,12 @@ public final class Card {
 		
 	}
 
+	/**
+	 * Create new card with boolean to indicate whether or not it is wild
+	 * @param suit
+	 * @param rank
+	 * @param Wild
+	 */
 	public Card(eSuit suit, eRank rank, boolean Wild) {
 		Suit = suit; 
 		Rank = rank; 
@@ -60,11 +66,18 @@ public final class Card {
 		return this.Suit;
 	}
 	
+	/**
+	 * Getter for Wild
+	 * @return
+	 */
 	public boolean getWild()
 	{
 		return this.Wild;
 	}
 	
+	/**
+	 * Setter for Wild
+	 */
 	public void setWild()
 	{
 		this.Wild = true;

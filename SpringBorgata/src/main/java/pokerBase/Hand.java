@@ -17,8 +17,9 @@ public class Hand {
 	private ArrayList<Card> CardsInHand;
 	private ArrayList<Card> BestCardsInHand;
 
+
 	@XmlElement
-	private int bNatural = 1;
+	private int bNatural = 1; //Attribute to determine if a hand is 'Wild' or not. 0 == false, 1 == true
 
 	@XmlElement
 	private int HandStrength;
@@ -34,14 +35,21 @@ public class Hand {
 	private boolean Flush;
 	private boolean Straight;
 	private boolean Ace;
-	private static Deck dNonWildDeck = new Deck();
+	private static Deck dNonWildDeck = new Deck(); //Creates new deck with no Jokers/Wild cards
 
-	private ArrayList<Hand> PossibleHands = new ArrayList<Hand>();
+	private ArrayList<Hand> PossibleHands = new ArrayList<Hand>(); //All possible hands given # Wild Cards in hand
 
+	/**
+	 * Defalt constructor for Hand
+	 */
 	public Hand() {
 
 	}
 
+	/**
+	 * Adds a card to the Hand
+	 * @param c
+	 */
 	public void AddCardToHand(Card c) {
 		if (this.CardsInHand == null) {
 			CardsInHand = new ArrayList<Card>();
@@ -49,10 +57,19 @@ public class Hand {
 		this.CardsInHand.add(c);
 	}
 
+	/**
+	 * Returns a card from the Hand
+	 * @param location
+	 * @return
+	 */
 	public Card GetCardFromHand(int location) {
 		return CardsInHand.get(location);
 	}
 
+	/**
+	 * Constructor for Hand that takes in specific Deck
+	 * @param d
+	 */
 	public Hand(Deck d) {
 		ArrayList<Card> Import = new ArrayList<Card>();
 		for (int x = 0; x < 5; x++) {
@@ -61,14 +78,26 @@ public class Hand {
 		CardsInHand = Import;
 	}
 
+	/**
+	 * Populates Hand with 5 cards
+	 * @param setCards
+	 */
 	public Hand(ArrayList<Card> setCards) {
 		this.CardsInHand = setCards;
 	}
 
+	/**
+	 * Returns the cards in a hand
+	 * @return
+	 */
 	public ArrayList<Card> getCards() {
 		return CardsInHand;
 	}
 
+	/**
+	 * Returns the best hand
+	 * @return
+	 */
 	public ArrayList<Card> getBestHand() {
 		return BestCardsInHand;
 	}
@@ -81,35 +110,70 @@ public class Hand {
 		return playerID;
 	}
 
+	/**
+	 * Setter for BestHand
+	 * @param BestHand
+	 */
 	public void setBestHand(ArrayList<Card> BestHand) {
 		this.BestCardsInHand = BestHand;
 	}
 
+	/**
+	 * Returns the Hand Strength of a hand
+	 * @return
+	 */
 	public int getHandStrength() {
 		return HandStrength;
 	}
 
+	/**
+	 * Returns the Kickers in a given Hand
+	 * @return
+	 */
 	public ArrayList<Card> getKicker() {
 		return Kickers;
 	}
 
+	/**Returns the strength of the 2nd highest hand
+	 * @return
+	 */
 	public int getHighPairStrength() {
 		return HiHand;
 	}
 
+	/**
+	 * Returns the strength of the 3rd highest hand
+	 * @return
+	 */
 	public int getLowPairStrength() {
 		return LoHand;
 	}
 
+	/**
+	 * Returns truth value of whether or not there is an Ace in the hand
+	 * @return
+	 */
 	public boolean getAce() {
 		return Ace;
 	}
 
+	/**
+	 * Returns 1 (true) or 0 (false) depending on whether hand is 'Wild' (0) or not (1)
+	 * @return
+	 */
 	public int getbNatural() {
 			
 			return this.bNatural;
 		}
 
+	/**
+	 * Takes in a hand and analyzes each card. If the card is a Joker or wild card, it sets
+	 * the hand as unnatural. Then, it calls SubstituteHand on the hand. Ultimately, what is returned
+	 * is an ArrayList of Hand ranging from 1 hand (if there were not Jokers/wild cards to millions of
+	 * hands.
+	 * @param h
+	 * @return
+	 */
 	private static ArrayList<Hand> ExplodeHands(Hand h) {
 		ArrayList<Hand> HandsToReturn = new ArrayList<Hand>();
 		HandsToReturn.add(h);
@@ -117,7 +181,7 @@ public class Hand {
 		for (int a = 0; a < h.CardsInHand.size(); a++) {
 			if (h.CardsInHand.get(a).getRank().getRank() == eRank.JOKER.getRank()
 					|| h.CardsInHand.get(a).getWild() == true) {
-				h.bNatural = 0;
+				h.bNatural = 0; //Hand is not natural
 			}
 		}
 
@@ -129,10 +193,18 @@ public class Hand {
 			HandsToReturn = SubstituteHand(HandsToReturn, a);
 		}
 
-		return HandsToReturn;
+		return HandsToReturn; //ArrayList of all possible Hands
 
 	}
 
+	/**
+	 * Determines number of Jokers/Wilds in Hand and substitutes each for every other card value in a 
+	 * natural Deck. Each Hand combination is then stored in an ArrayList of all possible Hands and returned
+	 * to the caller.
+	 * @param inHands
+	 * @param SubCardNo
+	 * @return
+	 */
 	private static ArrayList<Hand> SubstituteHand(ArrayList<Hand> inHands, int SubCardNo) {
 
 		ArrayList<Hand> SubHands = new ArrayList<Hand>();
@@ -143,23 +215,29 @@ public class Hand {
 
 				for (Card JokerSub : dNonWildDeck.getCards()) {
 					ArrayList<Card> SubCards = new ArrayList<Card>();
-					SubCards.add(JokerSub);
+					SubCards.add(JokerSub); //Adds substitute card for Joker/wild. Will iterate through entire naural deck
 
-					for (int a = 0; a < 5; a++) {
+					for (int a = 0; a < 5; a++) { //Adds original cards that are not wild/Jokers
 						if (SubCardNo != a) {
 							SubCards.add(h.getCards().get(a));
 						}
 					}
-					Hand subHand = new Hand(SubCards);
+					Hand subHand = new Hand(SubCards); //Creating new subHand
 					SubHands.add(subHand);
 				}
 			} else {
-				SubHands.add(h);
+				SubHands.add(h); //If no wilds/Jokers, subHands is an ArrayList of 1 element, the original Hand
 			}
 		}
 		return SubHands;
 	}
 
+	/**
+	 * Evaluates every hand in the ArrayList and determines the one with the highest Hand Strength. 
+	 * The highest strength hand becomes the new Hand
+	 * @param h
+	 * @return
+	 */
 	public static Hand EvalHand(Hand h) {
 		ArrayList<Hand> EvalHands = ExplodeHands(h);
 
@@ -173,6 +251,11 @@ public class Hand {
 
 	}
 	
+	/**
+	 * Same method as above but already takes in an ArrayList of hands
+	 * @param hands
+	 * @return
+	 */
 	public static Hand EvalHand(ArrayList<Hand> hands)
 	{
 		for (Hand EvalHand: hands)
@@ -186,6 +269,9 @@ public class Hand {
 		
 	}
 	
+	/**
+	 * Evaluates hand strength of Hand
+	 */
 	private void EvalHand() {
 
 		// Evaluates if the hand is a flush and/or straight then figures out
@@ -428,6 +514,13 @@ public class Hand {
 		}
 	}
 
+	/**
+	 * Scores all elements of Hand
+	 * @param hST
+	 * @param HiHand
+	 * @param LoHand
+	 * @param kickers
+	 */
 	private void ScoreHand(eHandStrength hST, int HiHand, int LoHand, ArrayList<Card> kickers) {
 		this.HandStrength = hST.getHandStrength();
 		this.HiHand = HiHand;

@@ -31,6 +31,9 @@ public class Deck_Test {
 	public void tearDown() throws Exception {
 	}
 
+	/**
+	 * Tests to see if the Deck is 52 cards
+	 */
 	@Test
 	public void TestFullDeck() {
 		int iDeckSize = 52;
@@ -38,6 +41,9 @@ public class Deck_Test {
 		assertTrue(d.getTotalCards() == iDeckSize);		
 	}
 	
+	/**
+	 * Tests to see if drawing a card reduces the deck by 1
+	 */
 	@Test
 	public void DrawOne() {
 		int iDeckSize = 52;
@@ -51,6 +57,9 @@ public class Deck_Test {
 		
 	}
 	
+	/**
+	 * Tests for Jokers in Deck
+	 */
 	@Test
 	public void JokerTest() {
 		Deck deck = new Deck(5);
@@ -72,6 +81,9 @@ public class Deck_Test {
  	}
 	
 	
+	/**
+	 * Tests for Wilds in Deck
+	 */
 	@Test
 	public void WildTest() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -92,7 +104,7 @@ public class Deck_Test {
 			else
 				continue;
 		}
-		
+		//Determines if the cards pulled are wild
 		assertTrue(assertList.get(0).getWild() == true);
 		assertTrue(assertList.get(1).getWild() == true);
 		assertTrue(assertList.get(2).getWild() == true);

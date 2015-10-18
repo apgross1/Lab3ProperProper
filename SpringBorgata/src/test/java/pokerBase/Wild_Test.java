@@ -14,6 +14,9 @@ import pokerEnums.eSuit;
 
 public class Wild_Test {
 
+	/**
+	 * Tests for 5 of a kind
+	 */
 	@Test
 	public void FiveOfAKind() {
 
@@ -41,6 +44,9 @@ public class Wild_Test {
 		
 	}
 	
+	/**
+	 * Tests for Royal Flush
+	 */
 	@Test
 	public void RoyalFlush() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -66,6 +72,9 @@ public class Wild_Test {
 		assertTrue(h.getHandStrength() == eHandStrength.RoyalFlush.getHandStrength());
 	}
 	
+	/**
+	 * Tests for natural Royal Flush (no Wilds)
+	 */
 	@Test
 	public void NaturalRoyalFlush() {
 		int NbrOfJokers = 0;
@@ -85,6 +94,9 @@ public class Wild_Test {
 	}
 	
 	
+	/**
+	 * Tests for Straight Flush (Wilds)
+	 */
 	@Test
 	public void StraightFlush() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -108,6 +120,9 @@ public class Wild_Test {
 		assertTrue(h.getHandStrength() == eHandStrength.StraightFlush.getHandStrength());
 	}
 	
+	/**
+	 * Tests for Straight Flush (no Wilds)
+	 */
 	@Test
 	public void nStraightFlush() {
 		int NbrOfJokers = 0;
@@ -124,6 +139,9 @@ public class Wild_Test {
 		h = Hand.EvalHand(h);
 		assertTrue(h.getHandStrength() == eHandStrength.StraightFlush.getHandStrength());
 	}
+	/**
+	 * Tests for Four of a Kind
+	 */
 	@Test
 	public void FourOfAKind_1() {
 
@@ -161,6 +179,9 @@ public class Wild_Test {
 
 	}
 
+	/**
+	 * Tests for 4 of a Kind in different position
+	 */
 	@Test
 	public void FourOfAKind_2() {
 		Deck d = new Deck();
@@ -242,6 +263,9 @@ public class Wild_Test {
 		assertTrue(h1.getKicker().get(0).getRank() == eRank.SIX);
 	}
 	
+	/**
+	 * Tests for Full House (no Wilds)
+	 */
 	@Test
 	public void nFullHouse() {
 		Deck d = new Deck();
@@ -275,6 +299,9 @@ public class Wild_Test {
 		assertTrue(h1.getKicker() == null);
 	}
 	
+	/**
+	 * Tests for Flush
+	 */
 	@Test
 	public void Flush() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -301,6 +328,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker() == null);
 	}
 	
+	/**
+	 * Tests for Flush (No Wilds)
+	 */
 	@Test
 	public void nFlush() {
 		int NbrOfJokers = 0;
@@ -321,6 +351,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker() == null);
 	}
 	
+	/**
+	 * Tests for Straight
+	 */
 	@Test
 	public void Straight() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -378,6 +411,9 @@ public class Wild_Test {
 		assertTrue(h2.getKicker() == null);
 	}
 	
+	/**
+	 *Tests for Straight (no Wilds) 
+	 */
 	@Test
 	public void nStraight() {
 		int NbrOfJokers = 0;
@@ -398,6 +434,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker() == null);
 	}
 	
+	/**
+	 * Tests for Three of a Kind
+	 */
 	@Test
 	public void ThreeOfAKind() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -426,6 +465,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker().get(0).getRank() == eRank.SIX);
 	}
 	
+	/**
+	 * Tests for Three of a Kind (no Wilds)
+	 */
 	@Test
 	public void nThreeOfAKind() {
 		int NbrOfJokers = 0;
@@ -517,6 +559,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker().get(0).getRank() == eRank.FIVE);
 	}
 	
+	/**
+	 * Tests for Two Pair (no Wilds)
+	 */
 	@Test
 	public void nTwoPair() {
 		int NbrOfJokers = 0;
@@ -554,6 +599,9 @@ public class Wild_Test {
 		assertTrue(h1.getKicker().get(0).getRank() == eRank.FOUR);
 	}
 	
+	/**
+	 * Tests for Pair
+	 */
 	@Test
 	public void Pair() {
 		ArrayList<Card> Wilds = new ArrayList<Card>();
@@ -583,6 +631,9 @@ public class Wild_Test {
 		assertTrue(h.getKicker().get(2).getRank() == eRank.FIVE);
 	}
 	
+	/**
+	 * Tests for Pair (no Wilds)
+	 */
 	@Test
 	public void nPair() {
 		int NbrOfJokers = 0;
@@ -662,6 +713,10 @@ public class Wild_Test {
 		assertTrue(h3.getKicker().get(2).getRank() == eRank.JACK);
 	}
 	
+	/**
+	 * Tests for High Card
+	 * No test for High Card with Wild because it would evaluate to Pair
+	 */
 	@Test
 	public void nHighCard() {
 		int NbrOfJokers = 0;
